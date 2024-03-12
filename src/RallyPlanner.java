@@ -58,6 +58,6 @@ public class RallyPlanner {
         Map<Camping, Integer> plan = makePlan(campings);
         long endTime = System.currentTimeMillis();
         printPlan(plan);
-        System.out.printf("Execution time: %dms\n", endTime-startTime);
+        System.out.printf("Execution time: %d ms\n", endTime-startTime);
     }
 }
