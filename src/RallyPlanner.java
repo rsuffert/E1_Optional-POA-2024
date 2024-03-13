@@ -40,10 +40,19 @@ public class RallyPlanner {
     }
 
     public static void printPlan(Map<Camping, Integer> plan) {
-        System.out.println("Plan:");
+        System.out.println("------------------------------------");
+        System.out.println("|            RALLY PLAN            |");
+        System.out.println("------------------------------------");
+        System.out.println("|        CAMPING       | VISIT DAY |");
+        System.out.println("------------------------------------");
         for (Map.Entry<Camping, Integer> entry : plan.entrySet()) {
-            System.out.printf("\tCamping: %15s | Day: %d\n", entry.getKey().id(), entry.getValue());
+            String campingName = entry.getKey().id();
+            String visitDay = entry.getValue().toString();
+            if (campingName.length() > 20) campingName = campingName.substring(0, 17) + "...";
+            if (entry.getValue() > 999999) visitDay = "> 999999";
+            System.out.printf("| %-20s | %8s  |\n", campingName, visitDay);
         }
+        System.out.println("------------------------------------");
     }
 
     public static void main(String[] args) {
