@@ -1,6 +1,6 @@
 package src;
 
-import java.security.InvalidParameterException;
+import java.lang.IllegalArgumentException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,9 +15,9 @@ public class RallyPlanner {
      * Makes the rally plan, considering the available campings and their distances to the next camping.
      * @param campings the list of available campings, where the first element is the starting line and the last elemet is the last camping before the finishing line.
      * @return a dictionary that maps each camping in the 'campings' parameter to the day when it will be visited.
-     * @throws InvalidParameterException if there's a camping in the 'campings' paramter list whose distance to the next camping is grater than the maximum daily distance.
+     * @throws IllegalArgumentException if there's a camping in the 'campings' paramter list whose distance to the next camping is grater than the maximum daily distance.
      */
-    public static Map<Camping, Integer> makePlan(List<Camping> campings) throws InvalidParameterException {        
+    public static Map<Camping, Integer> makePlan(List<Camping> campings) throws IllegalArgumentException {        
         Map<Camping, Integer> plan = new LinkedHashMap<>();
 
         int currentDay = 1;
@@ -27,7 +27,7 @@ public class RallyPlanner {
                 remainingDailyDistance -= c.distanceToNext();
             }
             else if (c.distanceToNext() > MAX_DAILY_DISTANCE) {
-                throw new InvalidParameterException(String.format("Camping %s's distance to the next camping is greater than the maximum daily distance, which is not allowed according to Premise 2 (P2).", c.id()));
+                throw new IllegalArgumentException(String.format("Camping \"%s\"'s distance to the next camping is greater than the maximum daily distance, which is not allowed according to Premise 2 (P2).", c.id()));
             }
             else {
                 currentDay++; // the team will sleep here because the next camping cannot be reached before night today
